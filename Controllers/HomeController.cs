@@ -17,4 +17,21 @@ public class HomeController : Controller
     {
         return View();
     }
+        public IActionResult Login(string usuario, string password)
+    {
+        if (string.IsNullOrWhiteSpace(usuario) == false)
+        {
+            //Contenido contenido = new Contenido();
+            Jugador jugador = new Jugador(usuario, password);
+            HttpContext.Session.SetString("jugador", Objeto.ObjectToString(jugador));//Permite llevar un objeto a jeson
+
+            jugador = Objeto.StringToObject<Jugador>(HttpContext.Session.GetString("jugador"));//Permite traer un jason a objeto
+
+            //contenido.InicializarContenido();
+            return RedirectToAction("Habitacion");
+        }
+        else { Console.WriteLine("Ya existe"); }
+
+        return View("Login");
+    }
 }
