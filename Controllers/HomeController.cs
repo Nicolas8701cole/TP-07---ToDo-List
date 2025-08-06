@@ -22,10 +22,10 @@ public class HomeController : Controller
         if (string.IsNullOrWhiteSpace(usuario) == false)
         {
             //Contenido contenido = new Contenido();
-            Jugador jugador = new Jugador(usuario, password);
-            HttpContext.Session.SetString("jugador", Objeto.ObjectToString(jugador));//Permite llevar un objeto a jeson
+            //Jugador jugador = new Jugador(usuario, password);
+            //HttpContext.Session.SetString("jugador", Objeto.ObjectToString(jugador));//Permite llevar un objeto a jeson
 
-            jugador = Objeto.StringToObject<Jugador>(HttpContext.Session.GetString("jugador"));//Permite traer un jason a objeto
+            //jugador = Objeto.StringToObject<Jugador>(HttpContext.Session.GetString("jugador"));//Permite traer un jason a objeto
 
             //contenido.InicializarContenido();
             return RedirectToAction("Habitacion");

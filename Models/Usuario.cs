@@ -1,19 +1,24 @@
 
 using Newtonsoft.Json;
-public class Jugador
+public class Usuario
 {
+    public string id { get; set; }
     public string nombre { get; set; }
-    public string pasword { get; set; }
-    public int habitacionActual { get; set; }
-    public Jugador(string nombre, string pasword)
+    public string password { get; set; }
+    public bool login { get; set; }
+    public Usuario(string nombre, string password, string id)
     {
         this.nombre = nombre;
-        this.pasword = pasword;
-        this.habitacionActual = 0;
+        this.password = password;
+        this.login = false;
+        this.id = id;
     }
-
-    public void Avanzar()
+    public void IniciarSesion()
     {
-        habitacionActual++;
+        login = true;
+    }
+    public void CerrarSesion()
+    {
+        login = false;
     }
 }
