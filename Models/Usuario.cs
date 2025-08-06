@@ -1,5 +1,3 @@
-
-using Newtonsoft.Json;
 public class Usuario
 {
     public string id { get; set; }
