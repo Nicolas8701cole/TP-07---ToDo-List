@@ -9,8 +9,8 @@ public class Tareas
     public int propietario { get; set; }
     public DateTime fecha {get; set;}
     public bool eliminado { get; set; }   
-    public List compartido();
-    public Tareas (int id, string estado, string nombre, string descripcion, int propietario, DateTime fecha, bool eliminado){
+    public List<Usuario> compartido {get; set;}
+    public Tareas (int id, int estado, string nombre, string descripcion, int propietario, DateTime fecha, bool eliminado){
         this.id = id;
         this.estado = estado;
         this.nombre = nombre;

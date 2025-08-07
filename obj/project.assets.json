@@ -2492,11 +2492,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\49091683\\Downloads\\TP-07-ToDoList\\TP-07-ToDoList\\TP03.csproj",
+      "projectUniqueName": "C:\\Users\\49091683\\Downloads\\TP-07---ToDo-List\\TP03.csproj",
       "projectName": "TP03",
-      "projectPath": "C:\\Users\\49091683\\Downloads\\TP-07-ToDoList\\TP-07-ToDoList\\TP03.csproj",
+      "projectPath": "C:\\Users\\49091683\\Downloads\\TP-07---ToDo-List\\TP03.csproj",
       "packagesPath": "C:\\Users\\49091683\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\49091683\\Downloads\\TP-07-ToDoList\\TP-07-ToDoList\\obj\\",
+      "outputPath": "C:\\Users\\49091683\\Downloads\\TP-07---ToDo-List\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

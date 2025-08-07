@@ -12,7 +12,7 @@ public class UserController : Controller
     {
         _logger = logger;
     }
-        public IActionResult Login(string usuario, string password)
+    public IActionResult Login(string usuario, string password)
     {
         if (string.IsNullOrWhiteSpace(usuario) == false)
         {
@@ -28,5 +28,43 @@ public class UserController : Controller
         else { Console.WriteLine("Ya existe"); }
 
         return View("Login");
+    }
+    public IActionResult AdministrarMovimientosEntrePestañas(int eleccion)
+    {
+        if (eleccion == 1)
+        {
+            ViewBag.dato = BD.LevantarClientes();
+            return View("LevantarTareas");
+        }
+        else if (eleccion == 2)
+        {
+            BD.EliminarClientes();
+            ViewBag.dato = BD.LevantarClientes();
+            return View("EliminarClientes");
+        }
+        else if (eleccion == 3)
+        {
+            BD.ActualizarMozos();
+            return View("ActualizarMozos");
+        }
+        else if (eleccion == 4)
+        {
+            return View("AgregarComidas");
+        }
+        else if (eleccion == 5)
+        {
+            ViewBag.dato = BD.LevantarMesas();
+            return View("LevantarMesas");
+        }
+        else
+        {
+            return View();
+        }
+    }
+    public IActionResult AgregarComida(string Nombre, int IdTipoComida, double Precio, bool SinGluten)
+    {
+        Comidas coco = new Comidas(Nombre, IdTipoComida, Precio, SinGluten);
+        BD.AgregarComidas(coco);
+        return RedirectToAction("Index");
     }
 }

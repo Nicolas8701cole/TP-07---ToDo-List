@@ -1,8 +1,25 @@
-﻿@{
-    ViewData["Title"] = "Index";
-}
+﻿<!DOCTYPE html>
+<html lang="en">
 
-<div>
-    <h1>Index</h1>
-    <p>Bienvenidos al sitio web de NombreProyecto</p>
-</div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InisiarSecion</title>
+</head>
+
+<body>
+
+    <main>
+        <form asp-controller="Home" asp-action="AdministrarMovimientosEntrePestañas" method="post" autocomplete="false" tabindex="-1">
+            <p>
+                Opciones <br><!--Radio button-->
+                <input type="radio" name="eleccion" value=1>Iniciar Secion <br>
+                <input type="radio" name="eleccion" value=2>Registrarse<br>
+                <input type="radio" name="eleccion" value=3>Creditos<br>
+                <input type="submit" value="Ingresar Respuesta">
+            </p>            
+        </form>
+    </main>
+</body>
+
+</html>
