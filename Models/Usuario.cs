@@ -2,12 +2,12 @@ public class Usuario
 {
     public string id { get; set; }
     public string nombre { get; set; }
-    public string password { get; set; }
+    public string clave { get; set; }
     public bool login { get; set; }
-    public Usuario(string nombre, string password, string id)
+    public Usuario(string nombre, string clave, string id)
     {
         this.nombre = nombre;
-        this.password = password;
+        this.clave = clave;
         this.login = false;
         this.id = id;
     }
