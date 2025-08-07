@@ -46,6 +46,20 @@ public static class Acciones
         }
         return usuario;
     }
+        public static int ConfirmarUsuarioExiste(string usuario, string clave)
+    {
+        int existe = 0;
+        using (SqlConnection connection = new SqlConnection(_connectionString))
+        {
+            string query = "Sesion";
+            existe = 
+            connection.Execute<>(
+                storedProcedure,
+                new { Letra = usuario},
+                commandType: ComanndType.storedProcedure);  //cuando devuelve 0 es que no existe 1 si
+        }
+        return usuario;
+    }
     public static void AgregarTarea(Tareas tareas)
     {
         string query = "INSERT INTO Tareas (estado, nombre, descripcion, propietario, fecha, eliminado) VALUES (@estado, @nombre, @descripcion, @propietario, @fecha, @eliminado)";

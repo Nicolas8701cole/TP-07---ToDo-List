@@ -17,4 +17,19 @@ public class HomeController : Controller
     {
         return View();
     }
+    public IActionResult AdministrarMovimientosEntrePestañas(int eleccion)
+    {
+        if (eleccion == 1)
+        {
+            return View("IniciarSesion");
+        }
+        else if (eleccion == 2)
+        {
+            return View("Registrarse");
+        }
+        else
+        {
+            return View("Creditos");
+        }
+    }
 }
