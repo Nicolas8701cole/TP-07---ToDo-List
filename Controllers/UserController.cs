@@ -17,20 +17,12 @@ public class UserController : Controller
         if (string.IsNullOrWhiteSpace(usuario) == false)
         {
             if (Acciones.ConfirmarUsuarioExiste(usuario, clave) == 1){
-                
+                return RedirectToAction("Page");
             }
-            //Contenido contenido = new Contenido();
-            //Jugador jugador = new Jugador(usuario, password);
-            //HttpContext.Session.SetString("jugador", Objeto.ObjectToString(jugador));//Permite llevar un objeto a jeson
-
-            //jugador = Objeto.StringToObject<Jugador>(HttpContext.Session.GetString("jugador"));//Permite traer un jason a objeto
-
-            //contenido.InicializarContenido();
-            return RedirectToAction("Habitacion");
         }
         else { Console.WriteLine("Ya existe"); }
 
-        return View("Login");
+        return View("Index");
     }
 
     //public IActionResult AgregarComida(string Nombre, int IdTipoComida, double Precio, bool SinGluten)

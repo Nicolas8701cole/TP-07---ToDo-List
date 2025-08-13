@@ -5,7 +5,7 @@ using System;
 public static class Acciones
 {
 
-    private static string _connectionString = @"Server=localhost;DataBase=TP07 -ORT Gourmet;Integrated Security=True;TrustServerCertificate=True;";
+    private static string _connectionString = @"Server=localhost;DataBase=TP07-ToDoList;Integrated Security=True;TrustServerCertificate=True;";
 
     public static List<Tareas> LevantarTareas()
     {
@@ -47,14 +47,25 @@ public static class Acciones
         }
         return usuario;
     }
-        public static int ConfirmarUsuarioExiste(string usuario, string clave)
+    public static int ConfirmarUsuarioExiste(string usuario, string clave)
     {
         int existe = 0;
         using (SqlConnection connection = new SqlConnection(_connectionString))
         {
             string storedProcedure = "Sesion";
-            existe =   connection.QueryFirstOrDefault<int>
-            (storedProcedure,new { username = usuario, password = clave },commandType: System.Data.CommandType.StoredProcedure);  //cuando devuelve 0 es que no existe 1 si
+            existe = connection.QueryFirstOrDefault<int>
+            (storedProcedure, new { username = usuario, password = clave }, commandType: System.Data.CommandType.StoredProcedure);  //cuando devuelve 0 es que no existe 1 si
+        }
+        return existe;
+    }
+    public static int RegistrarUsuarios(string usuario, string clave)
+    {
+        int existe = 0;
+        using (SqlConnection connection = new SqlConnection(_connectionString))
+        {
+            string storedProcedure = "Registro";
+            existe = connection.QueryFirstOrDefault<int>
+            (storedProcedure, new { username = usuario, password = clave }, commandType: System.Data.CommandType.StoredProcedure);  //cuando devuelve 0 es que no existe 1 si
         }
         return existe;
     }
