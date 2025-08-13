@@ -1,5 +1,6 @@
 using Microsoft.Data.SqlClient;
 using Dapper;
+using System;
 
 public static class Acciones
 {
@@ -51,14 +52,11 @@ public static class Acciones
         int existe = 0;
         using (SqlConnection connection = new SqlConnection(_connectionString))
         {
-            string query = "Sesion";
-            existe = 
-            connection.Execute<>(
-                storedProcedure,
-                new { Letra = usuario},
-                commandType: ComanndType.storedProcedure);  //cuando devuelve 0 es que no existe 1 si
+            string storedProcedure = "Sesion";
+            existe =   connection.QueryFirstOrDefault<int>
+            (storedProcedure,new { username = usuario, password = clave },commandType: System.Data.CommandType.StoredProcedure);  //cuando devuelve 0 es que no existe 1 si
         }
-        return usuario;
+        return existe;
     }
     public static void AgregarTarea(Tareas tareas)
     {
