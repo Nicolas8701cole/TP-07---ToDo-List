@@ -4,6 +4,7 @@ public class Usuario
     public string nombre { get; set; }
     public string clave { get; set; }
     public bool login { get; set; }
+    public Usuario(){} 
     public Usuario(string nombre, string clave, string id)
     {
         this.nombre = nombre;

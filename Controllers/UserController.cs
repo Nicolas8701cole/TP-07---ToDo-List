@@ -31,11 +31,33 @@ public class UserController : Controller
     {
         if (eleccion == 1)
         {
-            return View("IniciarSesion");
+            ViewBag.dato = Acciones.LevantarTareas();
+            return View("MostrarTarea");
         }
         else if (eleccion == 2)
         {
-            return View("Registrarse");
+            ViewBag.dato = Acciones.LevantarTareas();
+            return View("CrearTarea");
+        }
+        else if (eleccion == 3)
+        {
+            ViewBag.dato = Acciones.LevantarTareas();
+            return View("EditarTarea");
+        }
+        else if (eleccion == 4)
+        {
+            ViewBag.dato = Acciones.LevantarTareas();
+            return View("BorrarTarea");
+        }
+        else if (eleccion == 5)
+        {
+            ViewBag.dato = Acciones.LevantarTareas();
+            return View("CompartirTarea");
+        }
+        else if (eleccion == 6)
+        {
+            ViewBag.dato = Acciones.LevantarTareas();
+            return View("MarcarComoFinalizada");
         }
         else
         {

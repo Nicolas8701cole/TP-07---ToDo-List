@@ -38,6 +38,30 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/49091683/Downloads/TP-07---ToDo-List/Views/User/BorrarTarea.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxCb3JyYXJUYXJlYS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/49091683/Downloads/TP-07---ToDo-List/Views/User/CompartirTarea.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxDb21wYXJ0aXJUYXJlYS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/49091683/Downloads/TP-07---ToDo-List/Views/User/CrearTarea.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxDcmVhclRhcmVhLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/49091683/Downloads/TP-07---ToDo-List/Views/User/EditarTarea.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxFZGl0YXJUYXJlYS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/49091683/Downloads/TP-07---ToDo-List/Views/User/MarcarComoFinalizada.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxNYXJjYXJDb21vRmluYWxpemFkYS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/49091683/Downloads/TP-07---ToDo-List/Views/User/MostrarTarea.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxNb3N0cmFyVGFyZWEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/49091683/Downloads/TP-07---ToDo-List/Views/User/Page.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxQYWdlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

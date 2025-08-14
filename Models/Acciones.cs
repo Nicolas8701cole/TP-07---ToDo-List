@@ -4,7 +4,7 @@ using System;
 
 public static class Acciones
 {
-
+    
     private static string _connectionString = @"Server=localhost;DataBase=TP07-ToDoList;Integrated Security=True;TrustServerCertificate=True;";
 
     public static List<Tareas> LevantarTareas()
@@ -17,6 +17,7 @@ public static class Acciones
         }
         return tareas;
     }
+
     public static List<Tareas> LevantarTareasNoEliminadas()
     {
         List<Tareas> tareas = new List<Tareas>();
