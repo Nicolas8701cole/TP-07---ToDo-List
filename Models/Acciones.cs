@@ -54,7 +54,7 @@ public static class Acciones
         {
             string storedProcedure = "Sesion";
             existe = connection.QueryFirstOrDefault<int>
-            (storedProcedure, new { username = usuario, password = clave }, commandType: System.Data.CommandType.StoredProcedure);  //cuando devuelve 0 es que no existe 1 si
+            (storedProcedure, new { Nombre = usuario, clave = clave }, commandType: System.Data.CommandType.StoredProcedure);  //cuando devuelve 0 es que no existe 1 si
         }
         return existe;
     }
@@ -65,7 +65,7 @@ public static class Acciones
         {
             string storedProcedure = "Registro";
             existe = connection.QueryFirstOrDefault<int>
-            (storedProcedure, new { username = usuario, password = clave }, commandType: System.Data.CommandType.StoredProcedure);  //cuando devuelve 0 es que no existe 1 si
+            (storedProcedure, new { Nombre = usuario, Clave = clave }, commandType: System.Data.CommandType.StoredProcedure);  //cuando devuelve 0 es que no existe 1 si
         }
         return existe;
     }
