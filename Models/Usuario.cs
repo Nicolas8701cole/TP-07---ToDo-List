@@ -1,11 +1,11 @@
 public class Usuario
 {
-    public string id { get; set; }
+    public int id { get; set; }
     public string nombre { get; set; }
     public string clave { get; set; }
     public bool login { get; set; }
     public Usuario(){} 
-    public Usuario(string nombre, string clave, string id)
+    public Usuario(string nombre, string clave, int id)
     {
         this.nombre = nombre;
         this.clave = clave;

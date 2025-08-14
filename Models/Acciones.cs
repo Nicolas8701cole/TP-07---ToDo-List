@@ -75,7 +75,7 @@ public static class Acciones
         string query = "INSERT INTO Tareas (estado, nombre, descripcion, propietario, fecha, eliminado) VALUES (@estado, @nombre, @descripcion, @propietario, @fecha, @eliminado)";
         using (SqlConnection connection = new SqlConnection(_connectionString))
         {
-            connection.Execute(query, new { estado = tareas.estado, nombre = tareas.nombre, descripcion = tareas.descripcion, propietario = tareas.propietario, fecha = tareas.fecha, eliminado = tareas.eliminado });
+            connection.Execute(query, new { estado = tareas.estado, nombre = tareas.nombre, descripcion = tareas.descripcion, fecha = tareas.fecha, eliminado = tareas.eliminado });
         }
     }
     public static int EliminarTarea(int numeroDeTarea)
