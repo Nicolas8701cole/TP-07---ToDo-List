@@ -72,9 +72,9 @@ public class UserController : Controller
     {
         return RedirectToAction("Index", "Home");
     }
-    public IActionResult MarcarComoFinalizado(int id)
+    public IActionResult MarcarComoFinalizado(int idTarea)
     {
-        Acciones.MarcarComoFinalizado(id);
+        Acciones.MarcarComoFinalizado(idTarea);
         return View("Page");
     }
     //public IActionResult AgregarComida(string Nombre, int IdTipoComida, double Precio, bool SinGluten)
