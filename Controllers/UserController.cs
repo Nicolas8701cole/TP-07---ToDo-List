@@ -67,6 +67,10 @@ public class UserController : Controller
             return View("Creditos");
         }
     }
+        public IActionResult Desloguearse()
+    {
+        return RedirectToAction("Index", "Home");
+    }
     //public IActionResult AgregarComida(string Nombre, int IdTipoComida, double Precio, bool SinGluten)
     //{
     //Comidas coco = new Comidas(Nombre, IdTipoComida, Precio, SinGluten);

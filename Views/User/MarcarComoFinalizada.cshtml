@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+
+<body>
+
+ <h2>Listado de Tareas:</h2>
+
+    <form asp-controller="User" asp-action="MarcarComoFinalizado" method="post">
+        <p>
+            @foreach (Tareas tarea in ViewBag.dato)
+            {
+                <div>
+                    <input type="radio" name="idTarea" value="@tarea.id" />
+                    <label>@tarea.nombre</label>
+                </div>
+            }
+
+            <input type="submit" value="Marcar como finalizada" />
+        </p>
+    </form>
+</main>
+
+<a asp-controller="User" asp-action="AdministrarMovimientosEntrePestañas" asp-route-eleccion="7">
+    Volver a decisiones
+</a>
+
+</body>
+
+</html>
