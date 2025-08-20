@@ -59,6 +59,9 @@ public class UserController : Controller
             ViewBag.dato = Acciones.LevantarTareas();
             return View("MarcarComoFinalizada");
         }
+        else if (eleccion == 7){
+            return View("Page");
+        }
         else
         {
             return View("Creditos");

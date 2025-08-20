@@ -11,13 +11,17 @@
 
     <main>
         <h2>Listado de Clientes:</h2>
-         @foreach (Usuario usuario in ViewBag.dato)
+         @foreach (Tareas tarea in ViewBag.dato)
             {
                 <div> 
-                    <h2>@usuario.nombre </h2>
+                    <h2>@tarea.nombre </h2>
                 </div>
             }
     </main>
+    <a asp-controller="User" asp-action="AdministrarMovimientosEntrePestañas" asp-route-eleccion="7">
+        Volver a decisiones
+    </a>
+
 
 </body>
 
