@@ -4,7 +4,7 @@ using System;
 
 public static class Acciones
 {
-    
+
     private static string _connectionString = @"Server=localhost;DataBase=TP07-ToDoList;Integrated Security=True;TrustServerCertificate=True;";
 
     public static List<Tareas> LevantarTareas()
@@ -108,6 +108,16 @@ public static class Acciones
             {
                 connection.Execute(query, new { nombre, descripcion, id });
             }
+        }
+    }
+    public static void MarcarComoFinalizado(int iddd)
+    {
+        int existe = 0;
+        using (SqlConnection connection = new SqlConnection(_connectionString))
+        {
+            string storedProcedure = "MarcarComoFinalizado";
+            existe = connection.QueryFirstOrDefault<int>
+            (storedProcedure, new { idd = iddd }, commandType: System.Data.CommandType.StoredProcedure);
         }
     }
 }

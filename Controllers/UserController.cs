@@ -59,7 +59,8 @@ public class UserController : Controller
             ViewBag.dato = Acciones.LevantarTareas();
             return View("MarcarComoFinalizada");
         }
-        else if (eleccion == 7){
+        else if (eleccion == 7)
+        {
             return View("Page");
         }
         else
@@ -67,9 +68,14 @@ public class UserController : Controller
             return View("Creditos");
         }
     }
-        public IActionResult Desloguearse()
+    public IActionResult Desloguearse()
     {
         return RedirectToAction("Index", "Home");
+    }
+    public IActionResult MarcarComoFinalizado(int id)
+    {
+        Acciones.MarcarComoFinalizado(id);
+        return View("Page");
     }
     //public IActionResult AgregarComida(string Nombre, int IdTipoComida, double Precio, bool SinGluten)
     //{
