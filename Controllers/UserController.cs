@@ -77,6 +77,20 @@ public class UserController : Controller
         Acciones.MarcarComoFinalizado(idTarea);
         return View("Page");
     }
+    public IActionResult MandarAEditarTarea(int idTarea)
+    {
+        var tareas = Acciones.LevantarTareas();
+        var tareaSeleccionada = tareas.FirstOrDefault(t => t.id == idTarea);
+        ViewBag.tarea = tareaSeleccionada;
+        return View("EditarTareaEspesifica");
+    }
+        public IActionResult GuardarEdicionDeTarea(int idTarea)
+    {
+        var tareas = Acciones.LevantarTareas();
+        var tareaSeleccionada = tareas.FirstOrDefault(t => t.id == idTarea);
+        ViewBag.tarea = tareaSeleccionada;
+        return View("EditarTareaEspesifica");
+    }
     //public IActionResult AgregarComida(string Nombre, int IdTipoComida, double Precio, bool SinGluten)
     //{
     //Comidas coco = new Comidas(Nombre, IdTipoComida, Precio, SinGluten);
