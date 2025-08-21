@@ -91,7 +91,7 @@ public static class Acciones
         }
         return registrosAfectados;
     }
-    public static void ModificarTarea(int id, int estado, string nombre, string descripcion, int propietario, DateTime fecha, bool eliminado)
+    public static void ModificarTarea(int id, int estado, string nombre, string descripcion, DateTime fecha)
     {//Me dan una tarea
         bool existe = false;
         for (int i = 0; i <= LevantarTareasNoEliminadas().Count; i++)
@@ -103,10 +103,10 @@ public static class Acciones
         }
         if (existe)
         {//Si existe
-            string query = "UPDATE Tareas SET estado=@estado, nombre=@nombre, descripcion=@descripcion, propietario=@propietario, fecha=@fecha, eliminado=@eliminado WHERE id=@id";
+            string query = "UPDATE Tareas SET estado=@estado, nombre=@nombre, descripcion=@descripcion, fecha=@fecha WHERE id=@id";
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                connection.Execute(query, new { nombre, descripcion, id });
+                connection.Execute(query, new { nombre = nombre , descripcion = descripcion, id = id, estado = estado, fecha = fecha });
             }
         }
     }

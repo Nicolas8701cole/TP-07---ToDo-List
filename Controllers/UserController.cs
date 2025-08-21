@@ -82,14 +82,12 @@ public class UserController : Controller
         var tareas = Acciones.LevantarTareas();
         var tareaSeleccionada = tareas.FirstOrDefault(t => t.id == idTarea);
         ViewBag.tarea = tareaSeleccionada;
-        return View("EditarTareaEspesifica");
+        return View("EditarTareaEspecifica");
     }
-        public IActionResult GuardarEdicionDeTarea(int idTarea)
+        public IActionResult GuardarEdicionDeTarea(int id, string nombreTarea, string descripcionTarea, DateTime fecha, int estadoTarea)
     {
-        var tareas = Acciones.LevantarTareas();
-        var tareaSeleccionada = tareas.FirstOrDefault(t => t.id == idTarea);
-        ViewBag.tarea = tareaSeleccionada;
-        return View("EditarTareaEspesifica");
+        Acciones.ModificarTarea(id, estadoTarea, nombreTarea, descripcionTarea, fecha);
+        return View("Page");
     }
     //public IActionResult AgregarComida(string Nombre, int IdTipoComida, double Precio, bool SinGluten)
     //{
