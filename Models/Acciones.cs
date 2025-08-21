@@ -18,13 +18,15 @@ public static class Acciones
         return tareas;
     }
 
-    public static List<Tareas> LevantarTareasNoEliminadas()
+    public static List<Tareas> LevantarTareasNoEliminadas(int usuario)
     {
         List<Tareas> tareas = new List<Tareas>();
         using (SqlConnection connection = new SqlConnection(_connectionString))
         {
-            string query = "Execute LevantarTareasNoEliminadas";
-            tareas = connection.Query<Tareas>(query).ToList();
+            string storedProcedure = "LevantarTareasNoEliminadas";
+            tareas = connection.Query<Tareas>
+            (storedProcedure, new { usuario = usuario},
+             commandType: System.Data.CommandType.StoredProcedure).ToList();  //cuando devuelve 0 es que no existe 1 si
         }
         return tareas;
     }
@@ -94,7 +96,7 @@ public static class Acciones
     public static void ModificarTarea(int id, int estado, string nombre, string descripcion, DateTime fecha)
     {//Me dan una tarea
         bool existe = false;
-        for (int i = 0; i <= LevantarTareasNoEliminadas().Count; i++)
+        for (int i = 0; i <= LevantarTareasNoEliminadas(id).Count; i++)
         {//Revisa si existe
             if (i + 1 == id)
             {
@@ -106,7 +108,7 @@ public static class Acciones
             string query = "UPDATE Tareas SET estado=@estado, nombre=@nombre, descripcion=@descripcion, fecha=@fecha WHERE id=@id";
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                connection.Execute(query, new { nombre = nombre , descripcion = descripcion, id = id, estado = estado, fecha = fecha });
+                connection.Execute(query, new { nombre = nombre, descripcion = descripcion, id = id, estado = estado, fecha = fecha });
             }
         }
     }

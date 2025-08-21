@@ -12,16 +12,21 @@ public class UserController : Controller
     {
         _logger = logger;
     }
+    [HttpPost]
     public IActionResult Login(string usuario, string clave)
     {
         if (string.IsNullOrWhiteSpace(usuario) == false)
         {
             if (Acciones.ConfirmarUsuarioExiste(usuario, clave) == 1)
             {
+                Usuario usuario = new Usuario(usuario, clave);
+                HttpContext.Session.SetString("usuario", Objeto.ObjectToString(usuario));//Permite llevar un objeto a jeson
                 return View("Page");
             }
             else if (Acciones.RegistrarUsuarios(usuario, clave) == 1)
             {
+                Usuario usuario = new Usuario(usuario, clave);
+                HttpContext.Session.SetString("usuario", Objeto.ObjectToString(usuario));
                 return View("Page");
             }
         }
@@ -31,32 +36,38 @@ public class UserController : Controller
     {
         if (eleccion == 1)
         {
-            ViewBag.dato = Acciones.LevantarTareas();
+            Usuario usuario = Objeto.StringToObject<Usuario>(HttpContext.Session.GetString("usuario"));
+            ViewBag.dato = Acciones.LevantarTareasNoEliminadas(usuario.id);
             return View("MostrarTarea");
         }
         else if (eleccion == 2)
         {
-            ViewBag.dato = Acciones.LevantarTareas();
+            Usuario usuario = Objeto.StringToObject<Usuario>(HttpContext.Session.GetString("usuario"));
+            ViewBag.dato = Acciones.LevantarTareasNoEliminadas(usuario.id);
             return View("CrearTarea");
         }
         else if (eleccion == 3)
         {
-            ViewBag.dato = Acciones.LevantarTareas();
+            Usuario usuario = Objeto.StringToObject<Usuario>(HttpContext.Session.GetString("usuario"));
+            ViewBag.dato = Acciones.LevantarTareasNoEliminadas(usuario.id);
             return View("EditarTarea");
         }
         else if (eleccion == 4)
         {
-            ViewBag.dato = Acciones.LevantarTareas();
+            Usuario usuario = Objeto.StringToObject<Usuario>(HttpContext.Session.GetString("usuario"));
+            ViewBag.dato = Acciones.LevantarTareasNoEliminadas(usuario.id);
             return View("BorrarTarea");
         }
         else if (eleccion == 5)
         {
-            ViewBag.dato = Acciones.LevantarTareas();
+            Usuario usuario = Objeto.StringToObject<Usuario>(HttpContext.Session.GetString("usuario"));
+            ViewBag.dato = Acciones.LevantarTareasNoEliminadas(usuario.id);
             return View("CompartirTarea");
         }
         else if (eleccion == 6)
         {
-            ViewBag.dato = Acciones.LevantarTareas();
+            Usuario usuario = Objeto.StringToObject<Usuario>(HttpContext.Session.GetString("usuario"));
+            ViewBag.dato = Acciones.LevantarTareasNoEliminadas(usuario.id);
             return View("MarcarComoFinalizada");
         }
         else if (eleccion == 7)
@@ -79,12 +90,13 @@ public class UserController : Controller
     }
     public IActionResult MandarAEditarTarea(int idTarea)
     {
-        var tareas = Acciones.LevantarTareas();
+        Usuario usuario = Objeto.StringToObject<Usuario>(HttpContext.Session.GetString("usuario"));
+        var tareas = Acciones.LevantarTareasNoEliminadas(usuario.id);
         var tareaSeleccionada = tareas.FirstOrDefault(t => t.id == idTarea);
         ViewBag.tarea = tareaSeleccionada;
         return View("EditarTareaEspecifica");
     }
-        public IActionResult GuardarEdicionDeTarea(int id, string nombreTarea, string descripcionTarea, DateTime fecha, int estadoTarea)
+    public IActionResult GuardarEdicionDeTarea(int id, string nombreTarea, string descripcionTarea, DateTime fecha, int estadoTarea)
     {
         Acciones.ModificarTarea(id, estadoTarea, nombreTarea, descripcionTarea, fecha);
         return View("Page");
