@@ -5,12 +5,11 @@ public class Usuario
     public string clave { get; set; }
     public bool login { get; set; }
     public Usuario(){} 
-    public Usuario(string nombre, string clave, int id)
+    public Usuario(string nombre, string clave)
     {
         this.nombre = nombre;
         this.clave = clave;
         this.login = false;
-        this.id = id;
     }
     public void IniciarSesion()
     {

@@ -15,23 +15,46 @@ public class UserController : Controller
     [HttpPost]
     public IActionResult Login(string usuario, string clave)
     {
-        if (string.IsNullOrWhiteSpace(usuario) == false)
+        if (string.IsNullOrWhiteSpace(usuario) == false && string.IsNullOrWhiteSpace(clave) == false)
         {
             if (Acciones.ConfirmarUsuarioExiste(usuario, clave) == 1)
             {
-                Usuario usuario = new Usuario(usuario, clave);
-                HttpContext.Session.SetString("usuario", Objeto.ObjectToString(usuario));//Permite llevar un objeto a jeson
-                return View("Page");
+                Usuario usuario1 = Acciones.ObtenerUsuario(usuario);
+                if (usuario1 != null)
+                {
+                    HttpContext.Session.SetString("usuario", Objeto.ObjectToString(usuario1));//Permite llevar un objeto a jeson
+                    return View("Page");
+                }
             }
-            else if (Acciones.RegistrarUsuarios(usuario, clave) == 1)
+            else
             {
-                Usuario usuario = new Usuario(usuario, clave);
-                HttpContext.Session.SetString("usuario", Objeto.ObjectToString(usuario));
-                return View("Page");
+                return RedirectToAction("Registrarse", "Home");
             }
         }
         return RedirectToAction("Index", "Home");
     }
+        public IActionResult Registrarse(string usuario, string clave)
+    {
+        if (string.IsNullOrWhiteSpace(usuario) == false && string.IsNullOrWhiteSpace(clave) == false)
+        {
+            if (Acciones.ConfirmarUsuarioExiste(usuario, clave) == 0)
+            {
+                Acciones.Registro(usuario, clave);
+                Usuario usuario1 = Acciones.ObtenerUsuario(usuario);
+                if (usuario1 != null)
+                {
+                    HttpContext.Session.SetString("usuario", Objeto.ObjectToString(usuario1));//Permite llevar un objeto a jeson
+                    return View("Page");
+                }
+            }
+            else
+            {
+                return RedirectToAction("IniciarSesion", "Home");
+            }
+        }
+        return RedirectToAction("Index", "Home");
+    }
+
     public IActionResult AdministrarMovimientosEntrePestañas(int eleccion)
     {
         if (eleccion == 1)
@@ -81,6 +104,7 @@ public class UserController : Controller
     }
     public IActionResult Desloguearse()
     {
+        HttpContext.Session.Clear();
         return RedirectToAction("Index", "Home");
     }
     public IActionResult MarcarComoFinalizado(int idTarea)

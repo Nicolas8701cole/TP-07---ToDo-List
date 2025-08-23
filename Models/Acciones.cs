@@ -4,10 +4,10 @@ using System;
 
 public static class Acciones
 {
-
-    private static string _connectionString = @"Server=localhost;DataBase=TP07-ToDoList;Integrated Security=True;TrustServerCertificate=True;";
-
-    public static List<Tareas> LevantarTareas()
+    //Linea para conectar a bd antigua
+    //private static string _connectionString = @"Server=localhost;DataBase=TP07-ToDoList;Integrated Security=True;TrustServerCertificate=True;";
+    //Linea para conectar a bd nueva
+    private static string _connectionString = @"Server=MSI\SQLEXPRESS;DataBase=TP07-ToDoList;Integrated Security=True;TrustServerCertificate=True;"; public static List<Tareas> LevantarTareas()
     {
         List<Tareas> tareas = new List<Tareas>();
         using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -25,7 +25,7 @@ public static class Acciones
         {
             string storedProcedure = "LevantarTareasNoEliminadas";
             tareas = connection.Query<Tareas>
-            (storedProcedure, new { usuario = usuario},
+            (storedProcedure, new { usuario = usuario },
              commandType: System.Data.CommandType.StoredProcedure).ToList();  //cuando devuelve 0 es que no existe 1 si
         }
         return tareas;
@@ -72,54 +72,66 @@ public static class Acciones
         }
         return existe;
     }
-    public static void AgregarTarea(Tareas tareas)
+    public static void AgregarTarea(Tareas tareas, int propietario)
     {
-        string query = "INSERT INTO Tareas (estado, nombre, descripcion, propietario, fecha, eliminado) VALUES (@estado, @nombre, @descripcion, @propietario, @fecha, @eliminado)";
-        using (SqlConnection connection = new SqlConnection(_connectionString))
+        const string query = @"INSERT INTO Tareas (estado, nombre, descripcion, propietario, fecha, eliminado, compartido)
+                           VALUES (@estado, @nombre, @descripcion, @propietario, @fecha, @eliminado, @compartido)";
+        using (var connection = new SqlConnection(_connectionString))
         {
-            connection.Execute(query, new { estado = tareas.estado, nombre = tareas.nombre, descripcion = tareas.descripcion, fecha = tareas.fecha, eliminado = tareas.eliminado });
+            connection.Execute(query, new
+            {
+                estado = tareas.estado,
+                nombre = tareas.nombre,
+                descripcion = tareas.descripcion,
+                propietario = propietario,
+                fecha = tareas.fecha,
+                eliminado = tareas.eliminado,
+                compartido = tareas.compartido
+            });
         }
     }
-    public static int EliminarTarea(int numeroDeTarea)
-    //Usamos levantar tareas para darselas todas, que sean cliqueables de a uno y el que 
-    //toca enviar envía el id de tarea que es para marcarla como eliminada esta parte desde
-    //sql
+    public static int EliminarTarea(int idTarea)
     {
-        string query = "Execute EliminarTarea numeroDeTarea";
-        int registrosAfectados = 0;
-        using (SqlConnection connection = new SqlConnection(_connectionString))
+        const string query = "UPDATE Tareas SET eliminado = 1 WHERE id = @idTarea";
+        using (var connection = new SqlConnection(_connectionString))
         {
-            registrosAfectados = connection.Execute(query);
+            return connection.Execute(query, new { idTarea });
         }
-        return registrosAfectados;
     }
+
     public static void ModificarTarea(int id, int estado, string nombre, string descripcion, DateTime fecha)
-    {//Me dan una tarea
-        bool existe = false;
-        for (int i = 0; i <= LevantarTareasNoEliminadas(id).Count; i++)
-        {//Revisa si existe
-            if (i + 1 == id)
-            {
-                existe = true;
-            }
-        }
-        if (existe)
-        {//Si existe
-            string query = "UPDATE Tareas SET estado=@estado, nombre=@nombre, descripcion=@descripcion, fecha=@fecha WHERE id=@id";
-            using (SqlConnection connection = new SqlConnection(_connectionString))
-            {
-                connection.Execute(query, new { nombre = nombre, descripcion = descripcion, id = id, estado = estado, fecha = fecha });
-            }
+    {
+        string query = "UPDATE Tareas SET estado=@estado, nombre=@nombre, descripcion=@descripcion, fecha=@fecha WHERE id=@id AND eliminado=0";
+        using (var connection = new SqlConnection(_connectionString))
+        {
+            connection.Execute(query, new { id, estado, nombre, descripcion, fecha });
         }
     }
-    public static void MarcarComoFinalizado(int iddd)
+    public static Usuario ObtenerUsuario(string nombre)
+    {
+        using (SqlConnection connection = new SqlConnection(_connectionString))
+        {
+            string query = "SELECT * FROM Usuario WHERE Nombre = @Nombre";
+            return connection.QueryFirstOrDefault<Usuario>(query, new { Nombre = nombre });
+        }
+    }
+    public static void MarcarComoFinalizado(int idTarea)
+    {
+        using (var connection = new SqlConnection(_connectionString))
+        {
+            connection.Execute("MarcarComoFinalizado",
+                new { idd = idTarea },
+                commandType: System.Data.CommandType.StoredProcedure);
+        }
+    }
+    public static void Registro(string nombre, string clave)
     {
         int existe = 0;
         using (SqlConnection connection = new SqlConnection(_connectionString))
         {
-            string storedProcedure = "MarcarComoFinalizado";
+            string storedProcedure = "Registro";
             existe = connection.QueryFirstOrDefault<int>
-            (storedProcedure, new { idd = iddd }, commandType: System.Data.CommandType.StoredProcedure);
+            (storedProcedure, new { Nombre = nombre, Clave = clave }, commandType: System.Data.CommandType.StoredProcedure);
         }
     }
 }

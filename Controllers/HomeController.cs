@@ -32,4 +32,12 @@ public class HomeController : Controller
             return View("Creditos");
         }
     }
+    public IActionResult Registrarse()
+    {
+        return View("Registrarse");
+    }
+        public IActionResult IniciarSesion()
+    {
+        return View("IniciarSesion");
+    }
 }
