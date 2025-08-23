@@ -9,10 +9,11 @@
 @{
     var tarea = ViewBag.tarea as Tareas;
 }
+
 <body>
     <main>
-    <h2>Editar Tarea: </h2>
-            <form asp-controller="User" asp-action="GuardarEdicionDeTarea" method="post" autocomplete="false" tabindex="-1">
+        <h2>Editar Tarea: </h2>
+        <form asp-controller="User" asp-action="GuardarEdicionDeTarea" method="post" autocomplete="false" tabindex="-1">
             <p>
                 Opciones <br><!--Radio button-->
                 <label for="nombreTarea">@tarea.nombre</label>
@@ -24,35 +25,40 @@
                 <label for="fecha">Fecha</label>
                 <input type="date" id="fecha" name="fecha" value='@tarea.fecha.ToString("yyyy-MM-dd")' required />
 
-                @if(@tarea.estado == 0){
-                <label for="estadoTarea">Por hacer</label>
-                <select name="estadoTarea">
-                <option value="0">Por hacer</option>
-                <option value="2">En proceso</option>
-                <option value="1">Hecho</option>
-                </select>
-                }else if(@tarea.estado == 1){
-                <label for="estadoTarea">Hecho</label>
-                <select name="estadoTarea">
-                <option value="0">Por hacer</option>
-                <option value="2">En proceso</option>
-                <option value="1">Hecho</option>
-                </select>
-                }else{
-                <label for="estadoTarea">En proceso</label>
-                <select name="estadoTarea">
-                <option value="0">Por hacer</option>
-                <option value="2">En proceso</option>
-                <option value="1">Hecho</option>
-                </select>
+                @if (@tarea.estado == 0)
+                {
+                    <label for="estadoTarea">Por hacer</label>
+                    <select name="estadoTarea">
+                        <option value="0">Por hacer</option>
+                        <option value="2">En proceso</option>
+                        <option value="1">Hecho</option>
+                    </select>
+                }
+                else if (@tarea.estado == 1)
+                {
+                    <label for="estadoTarea">Hecho</label>
+                    <select name="estadoTarea">
+                        <option value="0">Por hacer</option>
+                        <option value="2">En proceso</option>
+                        <option value="1">Hecho</option>
+                    </select>
+                }
+                else
+                {
+                    <label for="estadoTarea">En proceso</label>
+                    <select name="estadoTarea">
+                        <option value="0">Por hacer</option>
+                        <option value="2">En proceso</option>
+                        <option value="1">Hecho</option>
+                    </select>
                 }
                 <input type="hidden" name="id" value=@tarea.id />
                 <input type="submit" value="Ingresar Respuesta">
             </p>
-            </form>
-            <a asp-controller="User" asp-action="AdministrarMovimientosEntrePestañas" asp-route-eleccion="7">
-                Volver a decisiones
-            </a>
+        </form>
+        <a asp-controller="User" asp-action="AdministrarMovimientosEntrePestañas" asp-route-eleccion="7">
+            Volver a decisiones
+        </a>
     </main>
 </body>
 

@@ -9,28 +9,29 @@
 
 <body>
 
- <h2>Cual editaras?</h2>
-            @foreach (Tareas tarea in ViewBag.dato)
-            {
-    <form asp-controller="User" asp-action="MandarAEditarTarea" method="post">
-        <p>
+    <h2>Cual editaras?</h2>
+    @foreach (Tareas tarea in ViewBag.dato)
+    {
+        <form asp-controller="User" asp-action="MandarAEditarTarea" method="post">
+            <p>
 
-                <div>
-                @if(@tarea.estado != 1){
+            <div>
+                @if (@tarea.estado != 1)
+                {
                     <input type="radio" name="idTarea" value="@tarea.id" />
                     <label>@tarea.nombre</label>
-                    <input type="submit" value="Marcar como finalizada" />                    
+                    <input type="submit" value="Marcar como finalizada" />
                 }
-                </div>
-            
-        </p>
-    </form>
-    }
-</main>
+            </div>
 
-<a asp-controller="User" asp-action="AdministrarMovimientosEntrePestañas" asp-route-eleccion="7">
-    Volver a decisiones
-</a>
+            </p>
+        </form>
+    }
+    </main>
+
+    <a asp-controller="User" asp-action="AdministrarMovimientosEntrePestañas" asp-route-eleccion="7">
+        Volver a decisiones
+    </a>
 
 </body>
 
