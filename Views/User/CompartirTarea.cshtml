@@ -8,14 +8,12 @@
 </head>
 
 <body>
-<!--Falta hacer, muestra las opciones a editar-->
-<!--y te permite escrivir el nombre de la persona a la que se lo mandaras-->
     <main>
         <h2>Escrive a quien se lo deseas compartir:</h2>
         <h2>Que tarea compartiras?</h2>
         @foreach (Tareas tarea in ViewBag.dato)
         {
-            <form asp-controller="User" asp-action="MandarAEditarTarea" method="post">
+            <form asp-controller="User" asp-action="MandarACompartirTarea" method="post">
                 <p>
 
                 <div>

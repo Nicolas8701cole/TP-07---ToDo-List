@@ -134,4 +134,13 @@ public static class Acciones
             (storedProcedure, new { Nombre = nombre, Clave = clave }, commandType: System.Data.CommandType.StoredProcedure);
         }
     }
+    public static void CompartirTarea(int idUsuario, int idTarea)
+    {
+        using (var connection = new SqlConnection(_connectionString))
+        {
+            connection.Execute("CompartirTarea",
+                new { IdUsuario = idUsuario, IdTarea = idTarea },
+                commandType: System.Data.CommandType.StoredProcedure);
+        }
+    }
 }

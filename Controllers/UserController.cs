@@ -33,7 +33,7 @@ public class UserController : Controller
         }
         return RedirectToAction("Index", "Home");
     }
-        public IActionResult Registrarse(string usuario, string clave)
+    public IActionResult Registrarse(string usuario, string clave)
     {
         if (string.IsNullOrWhiteSpace(usuario) == false && string.IsNullOrWhiteSpace(clave) == false)
         {
@@ -120,11 +120,26 @@ public class UserController : Controller
         ViewBag.tarea = tareaSeleccionada;
         return View("EditarTareaEspecifica");
     }
+    public IActionResult MandarACompartirTarea(int idTarea)
+    {
+        Usuario usuario = Objeto.StringToObject<Usuario>(HttpContext.Session.GetString("usuario"));
+        var tareas = Acciones.LevantarTareasNoEliminadas(usuario.id);
+        var tareaSeleccionada = tareas.FirstOrDefault(t => t.id == idTarea);
+        ViewBag.tarea = tareaSeleccionada;
+        ViewBag.idTarea = idTarea;
+        return View("AQuienLeCompartiras");
+    }
     public IActionResult GuardarEdicionDeTarea(int id, string nombreTarea, string descripcionTarea, DateTime fecha, int estadoTarea)
     {
         Acciones.ModificarTarea(id, estadoTarea, nombreTarea, descripcionTarea, fecha);
         return View("Page");
-    }
+    } 
+        public IActionResult ComperteTarea(string nombreUsuario, int idTarea)
+    {
+        Usuario idUsuario = Acciones.ObtenerUsuario(nombreUsuario);
+        Acciones.CompartirTarea(idUsuario.id, idTarea);
+        return View("Page");
+    } 
     //public IActionResult AgregarComida(string Nombre, int IdTipoComida, double Precio, bool SinGluten)
     //{
     //Comidas coco = new Comidas(Nombre, IdTipoComida, Precio, SinGluten);
