@@ -9,7 +9,6 @@
 
 <body>
     <main>
-        <h2>Escrive a quien se lo deseas compartir:</h2>
         <h2>Que tarea compartiras?</h2>
         @foreach (Tareas tarea in ViewBag.dato)
         {
@@ -21,7 +20,7 @@
                     {
                         <input type="radio" name="idTarea" value="@tarea.id" />
                         <label>@tarea.nombre</label>
-                        <input type="submit" value="Marcar como finalizada" />
+                        <input type="submit" value="Compartir" />
                     }
                 </div>
 

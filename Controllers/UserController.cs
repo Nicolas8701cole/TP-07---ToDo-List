@@ -37,7 +37,7 @@ public class UserController : Controller
     {
         if (string.IsNullOrWhiteSpace(usuario) == false && string.IsNullOrWhiteSpace(clave) == false)
         {
-            if (Acciones.ConfirmarUsuarioExiste(usuario, clave) == 0)
+            if (Acciones.ConfirmarNombreExiste(usuario) == 0)
             {
                 Acciones.Registro(usuario, clave);
                 Usuario usuario1 = Acciones.ObtenerUsuario(usuario);
@@ -133,17 +133,22 @@ public class UserController : Controller
     {
         Acciones.ModificarTarea(id, estadoTarea, nombreTarea, descripcionTarea, fecha);
         return View("Page");
-    } 
-        public IActionResult ComperteTarea(string nombreUsuario, int idTarea)
+    }
+    public IActionResult ComperteTarea(string nombreUsuario, int idTarea)
     {
         Usuario idUsuario = Acciones.ObtenerUsuario(nombreUsuario);
         Acciones.CompartirTarea(idUsuario.id, idTarea);
         return View("Page");
-    } 
+    }
     //public IActionResult AgregarComida(string Nombre, int IdTipoComida, double Precio, bool SinGluten)
     //{
     //Comidas coco = new Comidas(Nombre, IdTipoComida, Precio, SinGluten);
     //BD.AgregarComidas(coco);
     //return RedirectToAction("Index");
     //}
+    public IActionResult BorrarTarea(int idTarea)
+    {
+        Acciones.EliminarTarea(idTarea);
+        return View("Page");
+    }
 }

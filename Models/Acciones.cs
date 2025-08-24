@@ -7,7 +7,8 @@ public static class Acciones
     //Linea para conectar a bd antigua
     //private static string _connectionString = @"Server=localhost;DataBase=TP07-ToDoList;Integrated Security=True;TrustServerCertificate=True;";
     //Linea para conectar a bd nueva
-    private static string _connectionString = @"Server=MSI\SQLEXPRESS;DataBase=TP07-ToDoList;Integrated Security=True;TrustServerCertificate=True;"; public static List<Tareas> LevantarTareas()
+    private static string _connectionString = @"Server=MSI\SQLEXPRESS;DataBase=TP07-ToDoList;Integrated Security=True;TrustServerCertificate=True;";
+    public static List<Tareas> LevantarTareas()
     {
         List<Tareas> tareas = new List<Tareas>();
         using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -58,6 +59,17 @@ public static class Acciones
             string storedProcedure = "Sesion";
             existe = connection.QueryFirstOrDefault<int>
             (storedProcedure, new { Nombre = usuario, clave = clave }, commandType: System.Data.CommandType.StoredProcedure);  //cuando devuelve 0 es que no existe 1 si
+        }
+        return existe;
+    }
+    public static int ConfirmarNombreExiste(string usuario)
+    {
+        int existe = 0;
+        using (SqlConnection connection = new SqlConnection(_connectionString))
+        {
+            string storedProcedure = "ConfirmarNombreExiste";
+            existe = connection.QueryFirstOrDefault<int>
+            (storedProcedure, new { Nombre = usuario }, commandType: System.Data.CommandType.StoredProcedure);  //cuando devuelve 0 es que no existe 1 si
         }
         return existe;
     }
